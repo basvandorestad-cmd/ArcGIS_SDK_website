@@ -12,6 +12,19 @@
   color-scheme: light;
 }
 
+import OAuthInfo from "@arcgis/core/identity/OAuthInfo.js";
+import IdentityManager from "@arcgis/core/identity/IdentityManager.js";
+
+const info = new OAuthInfo({
+  appId: "TDVh6Cn0jFHXXWaG"
+});
+
+IdentityManager.registerOAuthInfos([info]);
+
+IdentityManager.getCredential(
+  "https://www.arcgis.com/sharing"
+);
+
 Test: add webmap
 <arcgis-map item-id="02b37471d5d84cacbebcccd785460e94">
   <arcgis-zoom slot="top-left"></arcgis-zoom>
