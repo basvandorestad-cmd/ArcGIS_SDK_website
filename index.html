@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ArcGIS SDK Website</title>
+  <meta charset="utf-8">
+  <title>ArcGIS Test</title>
+
+  <link rel="stylesheet"
+    href="https://js.arcgis.com/4.34/esri/themes/light/main.css">
+
+  <script src="https://js.arcgis.com/4.34/"></script>
 
   <style>
-    :root {
-      color-scheme: light;
-    }
-
     html,
     body {
       margin: 0;
       height: 100%;
     }
 
-    arcgis-map {
+    #viewDiv {
       position: absolute;
       top: 20px;
       left: 20px;
@@ -29,34 +29,30 @@
 
 <body>
 
-  <!-- Map -->
-  <arcgis-map item-id="02b37471d5d84cacbebcccd785460e94">
-    <arcgis-zoom position="top-left"></arcgis-zoom>
-  </arcgis-map>
+  <div id="viewDiv"></div>
 
-  <script type="module">
+  <script>
+    require([
+      "esri/WebMap",
+      "esri/views/MapView"
+    ], function (
+      WebMap,
+      MapView
+    ) {
 
-    // ArcGIS authentication
-    import OAuthInfo from "@arcgis/core/identity/OAuthInfo.js";
-    import IdentityManager from "@arcgis/core/identity/IdentityManager.js";
+      const webmap = new WebMap({
+        portalItem: {
+          id: "YOUR_WEBMAP_ID"
+        }
+      });
 
-    const oauthInfo = new OAuthInfo({
-      appId: "TDVh6Cn0jFHXXWaG"
+      const view = new MapView({
+        container: "viewDiv",
+        map: webmap
+      });
+
     });
-
-    IdentityManager.registerOAuthInfos([
-      oauthInfo
-    ]);
-
-    // Prompt sign-in if needed
-    await IdentityManager.getCredential(
-      "https://www.arcgis.com/sharing"
-    );
-
-    console.log("Successfully authenticated");
-
   </script>
 
 </body>
-
 </html>
