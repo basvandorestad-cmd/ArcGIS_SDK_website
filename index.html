@@ -47,14 +47,20 @@
       const webmap = new WebMap({
         portalItem: {
           id: "02b37471d5d84cacbebcccd785460e94"
-          <arcgis-zoom slot="top-left"></arcgis-zoom>
-          <arcgis-legend slot="bottom-right"></arcgis-legend>
         }
       });
 
       const view = new MapView({
         container: "viewDiv",
         map: webmap
+      });
+
+      const zoom = new Zoom({
+        view: view
+      });
+    
+      const legend = new Legend({
+        view: view
       });
 
     });
