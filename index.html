@@ -1,33 +1,60 @@
-<!-- Load the ArcGIS Maps SDK for JavaScript from CDN -->
-<script type="module" src="https://js.arcgis.com/5.1/"></script>
-<style>
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="en">
 
-:root {
-  color-scheme: light;
-}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcGIS SDK Website</title>
 
-import OAuthInfo from "@arcgis/core/identity/OAuthInfo.js";
-import IdentityManager from "@arcgis/core/identity/IdentityManager.js";
+  <style>
+    :root {
+      color-scheme: light;
+    }
 
-const info = new OAuthInfo({
-  appId: "TDVh6Cn0jFHXXWaG"
-});
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+    }
 
-IdentityManager.registerOAuthInfos([info]);
+    arcgis-map {
+      display: block;
+      height: 50vh;
+      width: 50%;
+    }
+  </style>
+</head>
 
-IdentityManager.getCredential(
-  "https://www.arcgis.com/sharing"
-);
+<body>
 
-Test: add webmap
-<arcgis-map item-id="02b37471d5d84cacbebcccd785460e94">
-  <arcgis-zoom slot="top-left"></arcgis-zoom>
-</arcgis-map>
+  <!-- Map -->
+  <arcgis-map item-id="02b37471d5d84cacbebcccd785460e94">
+    <arcgis-zoom position="top-left"></arcgis-zoom>
+  </arcgis-map>
 
+  <script type="module">
 
+    // ArcGIS authentication
+    import OAuthInfo from "@arcgis/core/identity/OAuthInfo.js";
+    import IdentityManager from "@arcgis/core/identity/IdentityManager.js";
+
+    const oauthInfo = new OAuthInfo({
+      appId: "TDVh6Cn0jFHXXWaG"
+    });
+
+    IdentityManager.registerOAuthInfos([
+      oauthInfo
+    ]);
+
+    // Prompt sign-in if needed
+    await IdentityManager.getCredential(
+      "https://www.arcgis.com/sharing"
+    );
+
+    console.log("Successfully authenticated");
+
+  </script>
+
+</body>
+
+</html>
